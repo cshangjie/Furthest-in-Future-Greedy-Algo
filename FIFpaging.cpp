@@ -34,5 +34,22 @@ int main()
         while(getline(ss, tmpStr, ' ')){
             reqSeqVec.push_back(stoi(tmpStr));
         }
+
+        int pageFaultCount = 0;
+        // iterate over requests
+        for (int elem: reqSeqVec){
+            // if elem isn't in page table
+            if(requests.find(elem) == requests.end()){
+                // if table size is less than cacheNumPages, insert elem into the page table
+                if(requests.size() < cacheNumPages){
+                    requests.insert(elem);
+                }
+                // eviction time + increment page fault counter
+                else{
+                    // TODO eviction stuff
+                    pageFaultCount++;
+                }
+            }
+        }
     }
 }
